@@ -4,7 +4,8 @@ features of the presented project, there is a implementation of a counter which 
 The score is incremented with each successive hit off the player’s paddle while the score is reset following the
 player’s failure to make contact with the ball object. The main objective of the game is for the player to achieve a
 high of a score that is possible - the game ends when the player achieves a specific score.
-![fsm](https://user-images.githubusercontent.com/62338143/211174461-50f7e18e-1ccc-498d-a85a-c259139b2de0.png)
+![dsfsdfsd](https://user-images.githubusercontent.com/62338143/211174528-8485e8db-9615-44a4-8499-2e73f8ac9240.png)
+
 
 
 # Finite state machine 
