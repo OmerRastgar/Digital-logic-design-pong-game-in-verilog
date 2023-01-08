@@ -1,0 +1,43 @@
+module TB;
+  reg [9:0] B_x,B_y,P_x;
+  reg  [4:0]B_speedx,B_speedy;
+  wire [4:0] speedx,speedy;
+  wire r, score;
+
+  initial
+    begin
+      B_x = -10'd10;
+      B_y= 10'd10;
+      P_x = 10'd100;
+      B_speedx= 4'd10;
+      B_speedy= 4'd10;
+      #10 
+      B_x = 10'd10;
+      B_y= 10'd9;
+      P_x = 10'd100;
+      B_speedx= 4'd10;
+      B_speedy= 4'd10;
+      #10
+      B_x = 10'd100;
+      B_y= 10'd453;
+      P_x = 10'd100;
+      B_speedx= 4'd10;
+      B_speedy= 4'd10;
+      #10
+      B_x = 10'd100;
+      B_y= 10'd479; 
+      P_x = 10'd100;
+      B_speedx= 4'd10;
+      B_speedy= 4'd10;
+    end
+  
+  collision I1(B_x,B_y,B_speedx,B_speedy,P_x,speedx,speedy,r,score);
+  
+  // Response
+  initial
+    begin
+      $dumpfile("testResults.vcd");
+      $dumpvars(1,TB);
+      $monitor("B_x=%9b, B_y=%9d, B_speedx=%1d,B_speedy=%1d ,P_x=%9d,speedx=%1d,speedy=%1d,r=%1d,score=%1d  \n",  B_x,B_y,B_speedx,B_speedy,P_x,speedx,speedy,r,score );
+    end  
+endmodule

@@ -1,0 +1,30 @@
+// Code your testbench here
+// or browse Examples
+module segmentDecoderTest;
+  reg [9:0] dD ;
+  reg [3:0] dS;
+  wire [9:0]S;
+  wire C;
+  
+  // Stimulus
+  initial
+    begin
+      dD = 10'd324;
+      dS = 4'd11;
+   
+            
+
+   
+    end
+  bitadder I1(dD,dS,S,C);
+ 
+  
+  // Response
+  initial
+    begin
+      $dumpfile("testResults.vcd");
+      $dumpvars(1,segmentDecoderTest);
+      $monitor("Time=%0d, A=%3b. B=%3b\n,S=%3b\n ,C=%1b\n", $time, dD, dS,S,C );
+    end  
+endmodule
+

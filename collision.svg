@@ -1,0 +1,20 @@
+module collision(B_x,B_y,B_speedx,B_speedy,P_x,speedx,speedy,r,score);
+  input [9:0] B_x, B_y, P_x; 
+  input [4:0] B_speedx,B_speedy;
+  output [4:0] speedx,speedy;
+  output r,score;
+  
+  parameter
+  paddle_sizex= 10'd5,
+  paddle_sizey=10'd1,
+  P_y = 10'd453;
+  
+   
+  assign speedx = (B_x < 10'd10) ? -B_speedx : (B_x > 633) ? -B_speedx:B_speedx;
+  assign speedy = (B_y < 10'b1010) ? -B_speedx: B_speedy;
+  assign r = (B_y > 10'b111001111) ?  1:0;  
+  assign score =  (B_x< (P_x+paddle_sizex)) ?  (B_x> (P_x-paddle_sizex)) ?(B_y< (P_y+paddle_sizey)) ? (B_y> (P_y-paddle_sizey)) ? 1:0:0 :0 :0 ;
+
+endmodule
+  
+  

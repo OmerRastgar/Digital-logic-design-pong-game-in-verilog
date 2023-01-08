@@ -1,0 +1,34 @@
+module adder (A,B,Y,CI,C);
+  input A,B,CI;
+  output Y,C;
+  assign Y=A^B^CI;
+  assign C=A&B+(CI&(A^B));
+endmodule
+
+module bitadder (A,B,S,C);
+  input [9:0] A;
+  input [3:0] B ;
+  output [9:0] S, C;
+  wire ansc,ansc1,ans2,ans3,ansc4,ans5,ansc6,ansc7,ansc8;
+  adder g1(.A(A[0]),.B(B[0]),.Y(S[0]),.CI(0),.C(ansc));
+  adder g2(.A(A[1]),.B(B[1]),.Y(S[1]),.CI(ansc),.C(ansc1));
+  adder g3(.A(A[2]),.B(B[2]),.Y(S[2]),.CI(ansc1),.C(ansc2));
+  adder g4(.A(A[3]),.B(B[3]),.Y(S[3]),.CI(ansc2),.C(ansc3));
+  adder g5(.A(A[4]),.B(0),.Y(S[4]),.CI(ansc3),.C(ansc4));
+  adder g6(.A(A[5]),.B(0),.Y(S[5]),.CI(ansc4),.C(ansc5));
+  adder g7(.A(A[6]),.B(0),.Y(S[6]),.CI(ansc5),.C(ansc6));
+  adder g8(.A(A[7]),.B(0),.Y(S[7]),.CI(ansc6),.C(ansc7));
+  adder g9(.A(A[8]),.B(0),.Y(S[8]),.CI(ansc7),.C(ansc8));
+  adder g10(.A(A[9]),.B(0),.Y(S[9]),.CI(ansc8),.C(C));
+endmodule
+
+module ball(B_x,B_y,B_speedx,B_speedy,B_x_new,B_y_new);
+  input [9:0]B_x;
+  input [9:0]B_y;
+  input [3:0]B_speedx;
+  input [3:0]B_speedy;
+  output [9:0]B_x_new;
+  output [9:0]B_y_new;
+  bitadder c1(.A(B_x),.B(B_speedx),.S(B_x_new),.C(C1));
+  bitadder c2(.A(B_y),.B(B_speedy),.S(B_y_new),.C(C2));
+endmodule

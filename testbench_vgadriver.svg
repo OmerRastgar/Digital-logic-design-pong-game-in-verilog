@@ -1,0 +1,84 @@
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+`timescale 1ns/1ps
+module testbench_vga();
+  
+  reg clk =0;
+  reg [15:0] simtime = 16'd5;
+  
+  wire h_sync;
+  wire v_sync;
+  
+  wire clk_D;
+  
+  wire [3:0] R;
+  wire [3:0] G;
+  wire [3:0] B;
+  
+  reg [9:0] xcoordball;
+  reg [9:0] ycoordball;
+  reg [9:0] xcoordpad;
+  
+  //coordinates are changed with input
+  initial begin
+    #16410000
+    xcoordball = 300;
+    ycoordball = 200;
+    xcoordpad = 300;
+    #16410000
+    xcoordball = xcoordball+200;
+    ycoordball = ycoordball+220;
+    xcoordpad = xcoordpad +200;
+  	#16410000
+    xcoordball = xcoordball+100;
+    ycoordball = ycoordball-100;
+    #16410000
+    xcoordball = xcoordball-200;
+    ycoordball = ycoordball-200;
+    #16410000
+    xcoordball = xcoordball-100;
+    ycoordball = ycoordball-100;
+    #16410000
+    xcoordball = xcoordball-200;
+    ycoordball = ycoordball+200;
+    #16410000
+    xcoordball = xcoordball+200;
+    ycoordball = ycoordball+200;
+	#16410000
+    xcoordball = xcoordball+100;
+    ycoordball = ycoordball+100;
+  end
+  
+    
+  integer file_ID;
+  toplevel test1t1 (clk,clk_D, h_sync, v_sync, R, G, B, xcoordball, ycoordball, xcoordpad);
+  
+  
+  
+  initial 
+    #10 file_ID = $fopen("output_log_file.txt", "w");
+  
+  always
+    #5 clk =~clk;
+  initial begin
+    //$dumpfile("dump.vcd");
+    //$dumpvars(1,testbench_bga);
+    #300000000 $fclose(file_ID);
+    #10 $finish;
+  end
+  
+  always @(posedge clk_D)
+    $fwrite(file_ID, "%05d ns: %b %b %b %b %b\n", $realtime, h_sync, v_sync, R, G, B);
+    
+  
+    
+  	
+endmodule
+
+
+
+
